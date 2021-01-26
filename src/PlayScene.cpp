@@ -83,30 +83,30 @@ void PlayScene::GUI_Function() const
 	// See examples by uncommenting the following - also look at imgui_demo.cpp in the IMGUI filter
 	//ImGui::ShowDemoWindow();
 	
-	ImGui::Begin("GAME3001 - W2021 - Lab 2", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
+	ImGui::Begin("GAME3001 - W2021 - Lab 2", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 
-	static float speed = 10.0f;
+	static auto speed = 10.0f;
 	if(ImGui::SliderFloat("MaxSpeed", &speed, 0.0f, 100.0f))
 	{
 		m_pSpaceShip->setMaxSpeed(speed);
 	}
 
-	static float accelerationRate = 2.0f;
-	if(ImGui::SliderFloat("AccelerationRate", &accelerationRate, 0.0f, 50.0f))
+	static auto acceleration_rate = 2.0f;
+	if(ImGui::SliderFloat("AccelerationRate", &acceleration_rate, 0.0f, 50.0f))
 	{
-		m_pSpaceShip->setAccelerationRate(accelerationRate);
+		m_pSpaceShip->setAccelerationRate(acceleration_rate);
 	}
 	
-	static float angleInRadians = m_pSpaceShip->getRotation();
-	if(ImGui::SliderAngle("Orientation Angle", &angleInRadians))
+	static auto angle_in_radians = m_pSpaceShip->getRotation();
+	if(ImGui::SliderAngle("Orientation Angle", &angle_in_radians))
 	{
-		m_pSpaceShip->setRotation(angleInRadians * Util::Rad2Deg);
+		m_pSpaceShip->setRotation(angle_in_radians * Util::Rad2Deg);
 	}
 
-	static float turnRate = 5.0f;
-	if (ImGui::SliderFloat("Turn Rate", &turnRate, 0.0f, 20.0f))
+	static auto turn_rate = 5.0f;
+	if (ImGui::SliderFloat("Turn Rate", &turn_rate, 0.0f, 20.0f))
 	{
-		m_pSpaceShip->setTurnRate(turnRate);
+		m_pSpaceShip->setTurnRate(turn_rate);
 	}
 
 	if(ImGui::Button("Start"))
@@ -126,10 +126,10 @@ void PlayScene::GUI_Function() const
 
 	ImGui::Separator();
 
-	static float targetPosition[2] = { m_pTarget->getTransform()->position.x, m_pTarget->getTransform()->position.y};
-	if(ImGui::SliderFloat2("Target", targetPosition, 0.0f, 800.0f))
+	static float target_position[2] = { m_pTarget->getTransform()->position.x, m_pTarget->getTransform()->position.y};
+	if(ImGui::SliderFloat2("Target", target_position, 0.0f, 800.0f))
 	{
-		m_pTarget->getTransform()->position = glm::vec2(targetPosition[0], targetPosition[1]);
+		m_pTarget->getTransform()->position = glm::vec2(target_position[0], target_position[1]);
 		m_pSpaceShip->setDestination(m_pTarget->getTransform()->position);
 	}
 
