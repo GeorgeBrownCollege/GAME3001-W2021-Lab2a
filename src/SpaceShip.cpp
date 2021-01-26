@@ -52,29 +52,28 @@ void SpaceShip::setMaxSpeed(const float speed)
 	m_maxSpeed = speed;
 }
 
-glm::vec2 SpaceShip::getOrientation()
+glm::vec2 SpaceShip::getOrientation() const
 {
 	return m_orientation;
 }
 
-void SpaceShip::setOrientation(glm::vec2 orientation)
+void SpaceShip::setOrientation(const glm::vec2 orientation)
 {
 	m_orientation = orientation;
 }
-
 
 float SpaceShip::getRotation() const
 {
 	return m_rotationAngle;
 }
 
-void SpaceShip::setRotation(float angle)
+void SpaceShip::setRotation(const float angle)
 {
 	m_rotationAngle = angle;
-	auto angleInRadians = (angle -90.0f) * Util::Deg2Rad;
+	const auto angle_in_radians = (angle - 90.0f) * Util::Deg2Rad;
 
-	auto x = cos(angleInRadians);
-	auto y = sin(angleInRadians);
+	const auto x = cos(angle_in_radians);
+	const auto y = sin(angle_in_radians);
 
 	setOrientation(glm::vec2(x, y));
 }
@@ -99,8 +98,6 @@ void SpaceShip::setAccelerationRate(const float acceleration)
 	m_accelerationRate = acceleration;
 }
 
-
-
 void SpaceShip::m_Move()
 {
 	auto deltaTime = TheGame::Instance()->getDeltaTime();
@@ -111,22 +108,21 @@ void SpaceShip::m_Move()
 	// normalized direction
 	m_targetDirection = Util::normalize(m_targetDirection);
 
-	auto targetRotation = Util::signedAngle(getOrientation(), m_targetDirection);
+	const auto target_rotation = Util::signedAngle(getOrientation(), m_targetDirection);
 
-	auto turnSensitivity = 5.0f;
+	const auto turn_sensitivity = 5.0f;
 
-	if(abs(targetRotation) > turnSensitivity)
+	if(abs(target_rotation) > turn_sensitivity)
 	{
-		if (targetRotation > 0)
+		if (target_rotation > 0)
 		{
 			setRotation(getRotation() + getTurnRate());
 		}
-		else if (targetRotation < 0)
+		else if (target_rotation < 0)
 		{
 			setRotation(getRotation() - getTurnRate());
 		}
 	}
-	
 
 	getRigidBody()->acceleration = getOrientation() * getAccelerationRate();
 	

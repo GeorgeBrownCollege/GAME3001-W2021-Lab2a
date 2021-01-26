@@ -109,8 +109,6 @@ void PlayScene::GUI_Function() const
 		m_pSpaceShip->setTurnRate(turnRate);
 	}
 
-	
-	
 	if(ImGui::Button("Start"))
 	{
 		m_pSpaceShip->setEnabled(true);
@@ -123,6 +121,7 @@ void PlayScene::GUI_Function() const
 		m_pSpaceShip->getTransform()->position = glm::vec2(100.0f, 100.0f);
 		m_pSpaceShip->setEnabled(false);
 		m_pSpaceShip->getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
+		m_pSpaceShip->setRotation(0.0f);
 	}
 
 	ImGui::Separator();
